@@ -1,3 +1,3 @@
 # not-twitter
 
-##Definitely not a clone of Twitter.com
+## Definitely not a clone of Twitter.com
