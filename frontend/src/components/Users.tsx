@@ -3,7 +3,7 @@ import { gql, useQuery } from '@apollo/client'
 
 const USERS_QUERY = gql`
 	query USERS_QUERY {
-		user_table {
+		allUsers {
 			id
 			name
 		}
@@ -21,15 +21,14 @@ const Users = () => {
 		return <p>Loading...</p>
 	} else if (!!error) {
 		return <p>{error.message}</p>
-	}
-
-	return (
-		<div>
-			{data.users.map((user: IUser) => (
-				<p>{user.name}</p>
-			))}
-		</div>
-	)
+	} else
+		return (
+			<div>
+				{data.allUsers.map((user: IUser) => (
+					<p>{user.name}</p>
+				))}
+			</div>
+		)
 }
 
 export default Users
