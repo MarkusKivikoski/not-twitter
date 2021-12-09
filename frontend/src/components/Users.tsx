@@ -24,8 +24,8 @@ const Users = () => {
 	} else
 		return (
 			<div>
-				{data.allUsers.map((user: IUser) => (
-					<p>{user.name}</p>
+				{data.allUsers.map((user: IUser, index: number) => (
+					<p key={index}>{user.name}</p>
 				))}
 			</div>
 		)

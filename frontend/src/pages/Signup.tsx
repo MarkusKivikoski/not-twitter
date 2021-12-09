@@ -55,7 +55,7 @@ const Signup = () => {
 			variables: values,
 		})
 		localStorage.setItem('token', response.data.signup.token)
-		console.log('jälkeen responsen + token: ', response)
+		console.log('jälkeen responsen: ', response)
 		setSubmitting(false)
 		navigate('/users')
 	}
