@@ -13,6 +13,7 @@ import Users from './components/Users'
 import Landing from './components/Landing'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
+import IsAuthenticated from './components/IsAuthenticated'
 
 const httpLink = new HttpLink({ uri: 'http://localhost:4000' })
 const authLink = setContext(async (req, { headers }) => {
@@ -37,7 +38,9 @@ const App = () => {
 		<ApolloProvider client={client}>
 			<Router>
 				<Routes>
-					<Route path="/users" element={<Users />} />
+					<IsAuthenticated>
+						<Route path="/users" element={<Users />} />
+					</IsAuthenticated>
 					<Route path="/signup" element={<Signup />} />
 					<Route path="/landing" element={<Landing />} />
 					<Route path="/login" element={<Login />} />
