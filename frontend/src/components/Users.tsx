@@ -17,6 +17,8 @@ interface IUser {
 const Users = () => {
 	const { loading, error, data } = useQuery(USERS_QUERY)
 
+	!!data && console.log('users: ', data)
+
 	if (!!loading) {
 		return <p>Loading...</p>
 	} else if (!!error) {
