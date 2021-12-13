@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as yup from 'yup'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const LOGIN_MUTATION = gql`
 	mutation login($email: String!, $password: String!) {
@@ -49,7 +49,7 @@ const Login = () => {
 
 	return (
 		<div>
-			<h1>Login</h1>
+			<h3>Log in</h3>
 			<Formik
 				initialValues={initialValues}
 				validationSchema={validationSchema}
@@ -60,11 +60,17 @@ const Login = () => {
 					<ErrorMessage name="email" component={'div'} />
 					<Field name="password" type="password" placeholder="Password" />
 					<ErrorMessage name="password" component={'div'} />
-					<button type="submit" disabled={submitting}>
-						Login
+					<button type="submit" disabled={submitting} className="login-button">
+						<span>Login</span>
 					</button>
 				</Form>
 			</Formik>
+			<div className="register">
+				<h4>Don't have an account yet?</h4>
+				<Link to="/signup">
+					<span>Sign up</span>
+				</Link>
+			</div>
 		</div>
 	)
 }

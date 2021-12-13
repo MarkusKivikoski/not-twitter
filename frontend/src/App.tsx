@@ -5,7 +5,7 @@ import {
 	InMemoryCache,
 	HttpLink,
 } from '@apollo/client'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import { setContext } from 'apollo-link-context'
 
@@ -16,6 +16,7 @@ import Login from './pages/Login'
 import IsAuthenticated from './components/IsAuthenticated'
 
 const httpLink = new HttpLink({ uri: 'http://localhost:4000' })
+
 const authLink = setContext(async (req, { headers }) => {
 	const token = localStorage.getItem('token')
 
@@ -36,16 +37,17 @@ const client = new ApolloClient({
 const App = () => {
 	return (
 		<ApolloProvider client={client}>
-			<Router>
+			<BrowserRouter>
 				<Routes>
-					<IsAuthenticated>
+					<Route path="/" element={<IsAuthenticated />}>
 						<Route path="/users" element={<Users />} />
-					</IsAuthenticated>
+					</Route>
+
 					<Route path="/signup" element={<Signup />} />
 					<Route path="/landing" element={<Landing />} />
 					<Route path="/login" element={<Login />} />
 				</Routes>
-			</Router>
+			</BrowserRouter>
 		</ApolloProvider>
 	)
 }

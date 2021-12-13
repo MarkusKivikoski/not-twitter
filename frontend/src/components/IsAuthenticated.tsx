@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { gql, useQuery } from '@apollo/client'
-import { useNavigate } from 'react-router-dom'
+import { Route, useNavigate, Outlet } from 'react-router-dom'
+import Landing from './Landing'
 
 const IS_LOGGED_IN = gql`
 	{
@@ -10,16 +11,22 @@ const IS_LOGGED_IN = gql`
 	}
 `
 
-interface IUser {
-	name: string
-}
-
 interface IProps {
 	children?: React.ReactNode
 }
 
+//mock authentication
+//need to fix actual auth
+const useAuth = () => {
+	const user = { loggedIn: false }
+	return user && user.loggedIn
+}
+
 const IsAuthenticated = ({ children }: IProps) => {
-	const { loading, error, data } = useQuery(IS_LOGGED_IN)
+	//const { loading, error, data } = useQuery(IS_LOGGED_IN)
+	const isAuthenticated = useAuth()
+
+	/*
 	const navigate = useNavigate()
 
 	!!data && console.log('users: ', data)
@@ -31,9 +38,9 @@ const IsAuthenticated = ({ children }: IProps) => {
 	}
 	if (!data.me) {
 		navigate('/landing')
-	}
+	} */
 
-	return <Fragment>{children}</Fragment>
+	return isAuthenticated ? <Outlet /> : <Landing />
 }
 
 export default IsAuthenticated
